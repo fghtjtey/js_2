@@ -16,16 +16,85 @@ gmailButton.onclick = () => {
 
 // HOME_WORK 1 (PART 2)
 
-const animatedBlock = document.getElementById('animated_block');
+const animatedBlock = document.getElementById('animated_block')
+
 let currentPosition = 0
-const step = 3
+let currentPosition_2 = 0
+
+const maxWidthParentBlock = 445 //449
+const minWidthParentBlock = 0
 
 function moveBlock() {
-    currentPosition += step
-    animatedBlock.style.left = currentPosition + 'px'
+    // animatedBlock.style.left = currentPosition + 'px'
+    // animatedBlock.style.top = currentPosition_2 + 'px'
 
-    if (currentPosition < 445) {
-        requestAnimationFrame(moveBlock)
+    if (currentPosition <= maxWidthParentBlock && currentPosition_2 === 0) {
+        currentPosition++
+        animatedBlock.style.left = `${currentPosition}px`
+        // requestAnimationFrame(moveBlock)
+
+
+    }else if(currentPosition >= maxWidthParentBlock && currentPosition_2 <= maxWidthParentBlock){
+        currentPosition_2++
+        animatedBlock.style.top = `${currentPosition_2}px`
+        // requestAnimationFrame(moveBlock)
+
+
+    }else if(currentPosition >= minWidthParentBlock && currentPosition_2 >= maxWidthParentBlock){
+        currentPosition--
+        animatedBlock.style.left = `${currentPosition}px`
+        // requestAnimationFrame(moveBlock)
+
+
+    }else if(currentPosition <= minWidthParentBlock && currentPosition_2 >= minWidthParentBlock){
+        currentPosition_2--
+        animatedBlock.style.top = `${currentPosition_2}px`
+        // requestAnimationFrame(moveBlock)
     }
+    requestAnimationFrame(moveBlock)
 }
 moveBlock()
+
+
+
+// HOME WORK 2
+
+const counterElement = document.getElementById('seconds');
+const startButton = document.getElementById('start');
+const stopButton = document.getElementById('stop');
+const resetButton = document.getElementById('reset');
+
+let counterValue = 0;
+let intervalId;
+
+
+function updateCounter() {
+    counterElement.textContent = counterValue;
+}
+
+
+function startCounter() {
+    if (!intervalId) {
+        intervalId = setInterval(() => {
+            counterValue++;
+            updateCounter();
+        }, 1000);
+    }
+}
+
+
+function stopCounter() {
+    clearInterval(intervalId);
+    intervalId = null;
+}
+
+
+function resetCounter() {
+    stopCounter();
+    counterValue = 0;
+    updateCounter();
+}
+
+startButton.addEventListener('click', startCounter);
+stopButton.addEventListener('click', stopCounter);
+resetButton.addEventListener('click', resetCounter);
