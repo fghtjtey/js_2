@@ -173,7 +173,7 @@
     left: 0;
     z-index: 2;
     background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); /* помогоет размыть задний фон */
     display: none;
 }
 
@@ -247,7 +247,7 @@
     border: 8px solid transparent;
     animation: animate 5s linear infinite;
     transform-origin: bottom center;
-    animation-play-state: run;
+    animation-play-state: running;
 }
 
 @keyframes animate {
